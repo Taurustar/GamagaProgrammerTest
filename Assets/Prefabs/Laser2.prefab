@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   damageDealed: 0
+  laserSpeed: 1.5
 --- !u!33 &7345682967480117972
 MeshFilter:
   m_ObjectHideFlags: 0

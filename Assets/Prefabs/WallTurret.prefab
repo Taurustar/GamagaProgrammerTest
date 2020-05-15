@@ -135,6 +135,7 @@ MonoBehaviour:
   LaserObject: {fileID: 6446757713668915724, guid: 1610a0c0a8f0349e0aae34622f9724a8,
     type: 3}
   damage: 10
+  speed: 1.5
   frecuency: 1
   firstShotDelay: 0
 --- !u!82 &2182050144587897668
