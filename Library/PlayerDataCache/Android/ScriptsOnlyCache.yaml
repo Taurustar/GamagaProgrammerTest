@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - AccelerationButtonScript
     - ActivateTurrets
     - DeactivateTurrets
     - Laser
@@ -27,6 +28,7 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.EventTrigger
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
@@ -99,11 +101,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14188}
     - Class: 114
+      Script: {instanceID: 14220}
+    - Class: 114
       Script: {instanceID: 14288}
     - Class: 114
       Script: {instanceID: 14292}
     - Class: 114
       Script: {instanceID: 14312}
+    - Class: 114
+      Script: {instanceID: 19078}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -651,7 +657,7 @@ ScriptsOnlyBuild:
     className: StandaloneInputModule
   - hash:
       serializedVersion: 2
-      Hash: 058eb5307e6e58412342d7e19a2f03b2
+      Hash: a271aa904d578cc3f9c02fc30ef5ceda
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerControl
@@ -691,6 +697,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 76890bed46657f54632de81dedea4f6d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AccelerationButtonScript
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity

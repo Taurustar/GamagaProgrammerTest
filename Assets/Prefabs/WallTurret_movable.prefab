@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 4673266007740957924}
   - component: {fileID: 2182050144587897668}
   - component: {fileID: 1590730867435414131}
-  - component: {fileID: 314395409013554710}
   m_Layer: 0
   m_Name: WallTurret_movable
   m_TagString: Untagged
@@ -131,14 +130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f8fa53dd1d446119d900b8a743150a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  configObject: {fileID: 0}
   laserPoints:
   - {fileID: 5137446004526759213}
-  LaserObject: {fileID: 6446757713668915724, guid: 1610a0c0a8f0349e0aae34622f9724a8,
-    type: 3}
-  damage: 10
-  speed: 1.5
-  frecuency: 1
-  firstShotDelay: 0
 --- !u!82 &2182050144587897668
 AudioSource:
   m_ObjectHideFlags: 0
@@ -248,19 +242,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.46659, y: 6.208242, z: 4.46659}
   m_Center: {x: 0, y: 2.836561, z: 0}
---- !u!114 &314395409013554710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3859034740717919808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cd69d6f5c6c045a5aa6b9d09ebecfce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  direction: 0
 --- !u!1 &3859034740717919810
 GameObject:
   m_ObjectHideFlags: 0

@@ -45,7 +45,6 @@ GameObject:
   - component: {fileID: 7522757348059219938}
   - component: {fileID: 6137455767176776226}
   - component: {fileID: -6539654285313372864}
-  - component: {fileID: 8484493814595382507}
   m_Layer: 0
   m_Name: FloorTurret_Movable
   m_TagString: Untagged
@@ -128,14 +127,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f8fa53dd1d446119d900b8a743150a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  configObject: {fileID: 0}
   laserPoints:
   - {fileID: 5459237075298868863}
   - {fileID: 5459237076519591894}
-  LaserObject: {fileID: 0}
-  damage: 0
-  speed: 1
-  frecuency: 0
-  firstShotDelay: 0
 --- !u!82 &7522757348059219938
 AudioSource:
   m_ObjectHideFlags: 0
@@ -258,19 +253,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.6676834, y: 4.596312, z: 3.3507206}
   m_Center: {x: 0.06922204, y: 2.3298786, z: 0.32586542}
---- !u!114 &8484493814595382507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5459237075905110882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cd69d6f5c6c045a5aa6b9d09ebecfce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  direction: 0
 --- !u!1 &5459237076519591894
 GameObject:
   m_ObjectHideFlags: 0

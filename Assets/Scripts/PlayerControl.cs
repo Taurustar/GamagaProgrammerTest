@@ -5,68 +5,80 @@ using UnityEngine.UI;
 public class PlayerControl : MonoBehaviour
 {
 
+    public PlayerConfigObject configObject;
 
-    public int health = 100;
+    [SerializeField]
+    int health;
     public Text healthText;
     public int score = 0;
     public Text scoreText;
-    public float acceleration = 1.75f;
+    float acceleration = 1.75f;
+    public bool accelerate;
+    bool colliding;
 
     Vector2 previousFramePos;
     // Start is called before the first frame update
     void Start()
     {
+        colliding = false;
+        health = configObject.startingHealth;
+        acceleration = configObject.normalAcceleration;
         previousFramePos = Vector2.zero;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Rotator>())
+        if (!colliding)
         {
-            if (other.GetComponent<Rotator>().direction == 0 && !other.GetComponent<Rotator>().done)
+            colliding = true;
+            if (other.GetComponent<Rotator>())
             {
-                StartCoroutine(TurnRight());
-                other.GetComponent<Rotator>().done = true;
+                if (other.GetComponent<Rotator>().direction == 0 && !other.GetComponent<Rotator>().done)
+                {
+                    StartCoroutine(TurnRight());
+                    other.GetComponent<Rotator>().done = true;
+                }
+
+
+                if (other.GetComponent<Rotator>().direction == 1 && !other.GetComponent<Rotator>().done)
+                {
+                    StartCoroutine(TurnLeft());
+                    other.GetComponent<Rotator>().done = true;
+                }
             }
 
-
-            if (other.GetComponent<Rotator>().direction == 1 && !other.GetComponent<Rotator>().done)
+            if (other.GetComponent<ActivateTurrets>())
             {
-                StartCoroutine(TurnLeft());
-                other.GetComponent<Rotator>().done = true;
+                foreach (ShootLaser turret in other.GetComponent<ActivateTurrets>().turrets)
+                {
+                    turret.enabled = true;
+                }
             }
-        }
 
-        if(other.GetComponent<ActivateTurrets>())
-        {
-            foreach (ShootLaser turret in other.GetComponent<ActivateTurrets>().turrets)
+            if (other.GetComponent<DeactivateTurrets>())
             {
-                turret.enabled = true;
-            }
-        }
+                for (int i = 0; i < other.GetComponent<DeactivateTurrets>().turrets.Length; i++)
+                {
+                    if (other.GetComponent<DeactivateTurrets>().turrets[i] != null)
+                        Destroy(other.GetComponent<DeactivateTurrets>().turrets[i].gameObject);
 
-        if (other.GetComponent<DeactivateTurrets>())
-        {
-            for( int i = 0; i < other.GetComponent<DeactivateTurrets>().turrets.Length; i++)
+                }
+            }
+
+            if (other.GetComponent<ShootLaser>())
             {
-                if(other.GetComponent<DeactivateTurrets>().turrets[i] != null)
-                Destroy(other.GetComponent<DeactivateTurrets>().turrets[i].gameObject);
-                
+                Destroy(other.gameObject);
+                health -= 25;
+                healthText.text = " Health: " + health.ToString();
             }
-        }
 
-        if(other.GetComponent<ShootLaser>())
-        {
-            Destroy(other.gameObject);
-            health -= 25;
-            healthText.text = " Health: " + health.ToString();
-        }
-
-        if(other.GetComponent<ScoreObject>())
-        {
-            Destroy(other.gameObject);
-            score += other.GetComponent<ScoreObject>().score;
-            scoreText.text = " Score: " + score.ToString();
+            if (other.GetComponent<ScoreObject>())
+            {
+                Destroy(other.gameObject);
+                score += other.GetComponent<ScoreObject>().configObject.scoreAmmount;
+                scoreText.text = " Score: " + score.ToString();
+            }
+            colliding = false;
         }
 
     }
@@ -122,14 +134,14 @@ public class PlayerControl : MonoBehaviour
             MoveRight();
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || accelerate)
         {
-            acceleration = 3;
+            acceleration = configObject.maxAcceleration;
             transform.Translate((Vector3.forward / 100) * acceleration);
         }
         else
         {
-            acceleration = 1;
+            acceleration = configObject.normalAcceleration;
             transform.Translate((Vector3.forward / 100) * acceleration);
         }
     }
@@ -163,5 +175,16 @@ public class PlayerControl : MonoBehaviour
         transform.Translate(Vector3.right / 100);
     }
 
+
+
+    public int getHealth()
+    {
+        return health;
+    }
+
+    public void setHealth(int newHealth)
+    {
+        health = newHealth;
+    }
 
 }

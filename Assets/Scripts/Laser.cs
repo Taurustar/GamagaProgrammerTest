@@ -29,8 +29,8 @@ public class Laser : MonoBehaviour
                 damageDealed = true;
                 if (other.GetComponent<PlayerControl>())
                 {
-                    other.GetComponent<PlayerControl>().health -= damage;
-                    other.GetComponent<PlayerControl>().healthText.text = " Health: " + other.GetComponent<PlayerControl>().health.ToString();
+                    other.GetComponent<PlayerControl>().setHealth(other.GetComponent<PlayerControl>().getHealth() - damage);
+                    other.GetComponent<PlayerControl>().healthText.text = " Health: " + other.GetComponent<PlayerControl>().getHealth().ToString();
                 }
 
                 Destroy(gameObject);

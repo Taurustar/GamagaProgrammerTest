@@ -4,85 +4,91 @@ using UnityEngine;
 
 public class TurretMovable : MonoBehaviour
 {
-
-    public enum Direction
-    {
-        FRONT,
-        REAR,
-        LEFT,
-        RIGHT
-
-    };
-
-    public Direction direction;
+    [Tooltip("Sets the configObject")]
+    public TurretConfigObject configObject;
+    [SerializeField]
+    TurretConfigObject.Direction localDirection;
+    /// <summary>
+    /// Check the distance that the turret has moved. resets after it reaches the limit
+    /// </summary>
+    [SerializeField]
     float distanceMoved;
+    float previous;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        distanceMoved = 0;
+        localDirection = configObject.movementDirection;
+        if (localDirection == TurretConfigObject.Direction.FRONT || localDirection == TurretConfigObject.Direction.REAR)
+        { previous = transform.position.z; }
+        else
+        { previous = transform.position.x; }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (direction == Direction.FRONT || direction == Direction.REAR)
+        //Movement functions for FRONT & REAR Directions
+        if (localDirection == TurretConfigObject.Direction.FRONT || localDirection == TurretConfigObject.Direction.REAR)
         {
-            if (direction == Direction.FRONT)
+            if (localDirection == TurretConfigObject.Direction.FRONT)
             {
-                float previous = transform.position.z;
+
                 transform.Translate(Vector3.forward / 100);
-                distanceMoved += Mathf.Abs(previous - transform.position.z);
-                if(distanceMoved > 3)
+                distanceMoved += 0.01f;
+                if (distanceMoved > configObject.movementLimit)
                 {
-                    direction = Direction.REAR;
+                    localDirection = TurretConfigObject.Direction.REAR;
                     distanceMoved = 0;
+                    
                 }
-            }
+            } else
 
-            if (direction == Direction.REAR)
+            if (localDirection == TurretConfigObject.Direction.REAR)
             {
-                float previous = transform.position.z;
+
                 transform.Translate((Vector3.forward / 100) * -1);
-                distanceMoved += Mathf.Abs(previous - transform.position.z);
-                if (distanceMoved > 3)
+                distanceMoved += 0.01f;
+                if (distanceMoved > configObject.movementLimit)
                 {
-                    direction = Direction.FRONT;
+                    localDirection = TurretConfigObject.Direction.FRONT;
                     distanceMoved = 0;
                 }
             }
 
-
+            previous = transform.position.z;
         }
 
-
-        if (direction == Direction.RIGHT || direction == Direction.LEFT)
+        //Movement Functions for RIGHT & LEFT Directions
+        if (localDirection == TurretConfigObject.Direction.RIGHT || localDirection == TurretConfigObject.Direction.LEFT)
         {
-            if (direction == Direction.RIGHT)
+            if (localDirection == TurretConfigObject.Direction.RIGHT)
             {
-                float previous = transform.position.x;
+
                 transform.Translate(Vector3.right / 100);
-                distanceMoved += Mathf.Abs(previous - transform.position.x);
-                if (distanceMoved > 3)
+                distanceMoved += 0.01f;
+                if (distanceMoved > configObject.movementLimit)
                 {
-                    direction = Direction.LEFT;
+                    localDirection = TurretConfigObject.Direction.LEFT;
                     distanceMoved = 0;
                 }
-            }
+            }else
 
-            if (direction == Direction.LEFT)
+            if (localDirection == TurretConfigObject.Direction.LEFT)
             {
-                float previous = transform.position.x;
+
                 transform.Translate((Vector3.right / 100) * -1);
-                distanceMoved += Mathf.Abs(previous - transform.position.x);
-                if (distanceMoved > 3)
+                distanceMoved += 0.01f;
+                if (distanceMoved > configObject.movementLimit)
                 {
-                    direction = Direction.RIGHT;
+                    localDirection = TurretConfigObject.Direction.RIGHT;
                     distanceMoved = 0;
                 }
             }
 
-
+            previous = transform.position.x;
         }
     }
 }

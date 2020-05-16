@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class ScoreObject : MonoBehaviour
 {
-    public int score;
+    public ScoreConfigObject configObject;
+
+    private void Start()
+    {
+        GetComponentInChildren<Light>().color = configObject.lightColor;
+        GetComponent<MeshRenderer>().material = configObject.material;
+    }
 
     private void Update()
     {
