@@ -1,20 +1,20 @@
 Gamaga Programmer Test - Space Escape
 --------------------------------------
-Unity Version Used: 2019.3.10f1
-Target: Android, PC, Mac
-Game Type: Runner
-Theme: Sci-Fi
-3D/2D: 3D 
++ Unity Version Used: 2019.3.10f1
++ Target: Android, PC, Mac
++ Game Type: Runner
++ Theme: Sci-Fi
++ 3D/2D: 3D 
 
 
-Here is the Unity Project that I've made to apply for a Game Programmer role in Gamaga company, the game is a 3D runner where the player must evade lasers and obstacles in the level and reach the ed of it.
+Here is the Unity Project that I've made to apply for a Game Programmer role in Gamaga company, the game is a 3D runner where the player must evade lasers and obstacles in the level and reach the end of it.
 
 
 Development Known Issues
 **************************************
--If you use Random laser speed attribute when create the Scriptable object for a turret, there's a slightly chance that the laser becomes unavoidable for the player, this is affected depending on the device is played
--Drag movement must be improved in android devices, I tried to to it by myself without using any script asset from the marketplace.
--With the aiming turret there's a little chance that the projectile collides with the turret itself in certain rotation angles.
++ If you use Random laser speed attribute when create the Scriptable object for a turret, there's a slightly chance that the laser becomes unavoidable for the player, this is affected depending on the device is played
++ Drag movement must be improved in android devices, I tried to to it by myself without using any script asset from the marketplace.
++ With the aiming turret there's a little chance that the projectile collides with the turret itself in certain rotation angles.
 
 
 Assets Used From Unity Marketplace
@@ -52,6 +52,6 @@ https://assetstore.unity.com/packages/3d/vehicles/space/space-ship-shooter-1807
 
 Controls
 **********************
-PC/Mac: W-A-S-D for Character movement and Spacebar for Accelerated movement
++ PC/Mac: W-A-S-D for Character movement and Spacebar for Accelerated movement
 
-Android: Drag your finger over the scree to move and press the "Accelerate" button for accelerated movement
++ Android: Drag your finger over the scree to move and press the "Accelerate" button for accelerated movement
