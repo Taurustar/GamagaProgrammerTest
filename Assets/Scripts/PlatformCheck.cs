@@ -11,7 +11,7 @@ public class PlatformCheck : MonoBehaviour
     {
 #if !UNITY_ANDROID
 
-        foreach(int i = 0; i < androidComponents.Lenght ; i++)
+        for(int i = 0; i < androidComponents.Length ; i++)
         {
             Destroy(androidComponents[i]);
         }

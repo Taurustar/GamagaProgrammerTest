@@ -9,17 +9,26 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField]
     int health;
+    [Tooltip("Indicates the text UI object that shows the Health Ammount")]
     public Text healthText;
     public int score = 0;
+    [Tooltip("Indicates the text UI object that shows the Player's Score")]
     public Text scoreText;
     float acceleration = 1.75f;
     public bool accelerate;
     bool colliding;
+    [Tooltip("The Canvas when the player reaches the end of the level")]
+    public Canvas winMenu;
+    [Tooltip("The Canvas when the player loses all its health")]
+    public Canvas loseMenu;
+    public bool end;
+
 
     Vector2 previousFramePos;
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         colliding = false;
         health = configObject.startingHealth;
         acceleration = configObject.normalAcceleration;
@@ -72,18 +81,39 @@ public class PlayerControl : MonoBehaviour
                 healthText.text = " Health: " + health.ToString();
             }
 
+            
+
             if (other.GetComponent<ScoreObject>())
             {
                 Destroy(other.gameObject);
                 score += other.GetComponent<ScoreObject>().configObject.scoreAmmount;
                 scoreText.text = " Score: " + score.ToString();
             }
+
+            if (other.tag == "End Level")
+            {
+                Time.timeScale = 0;
+                end = true;
+                acceleration = 0;
+                winMenu.enabled = true;
+            }
+
             colliding = false;
         }
 
+
+        
+
     }
 
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            health -= 100;
+            healthText.text = " Health: " + health.ToString();
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -105,44 +135,55 @@ public class PlayerControl : MonoBehaviour
             }
         }*/
 
-
-
-        if(Input.touchCount == 1)
+        if (health <= 0)
         {
-            if (Input.GetTouch(0).position.x > previousFramePos.x)
-            {
-                MoveRight();
-            }
-            if (Input.GetTouch(0).position.x < previousFramePos.x)
-            {
-                MoveLeft();
-            }
-
-            previousFramePos = Input.GetTouch(0).position;
-        }
-        
-
-
-
-        if(Input.GetKey(KeyCode.A))
-        {
-            MoveLeft();
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            MoveRight();
-        }
-
-        if (Input.GetKey(KeyCode.Space) || accelerate)
-        {
-            acceleration = configObject.maxAcceleration;
-            transform.Translate((Vector3.forward / 100) * acceleration);
+            health = 0;
+            colliding = true;
+            Time.timeScale = 0;
+            loseMenu.enabled = true;
         }
         else
         {
-            acceleration = configObject.normalAcceleration;
-            transform.Translate((Vector3.forward / 100) * acceleration);
+            if (!end)
+            {
+                if (Input.touchCount == 1)
+                {
+                    if (Input.GetTouch(0).position.x > previousFramePos.x)
+                    {
+                        MoveRight();
+                    }
+                    if (Input.GetTouch(0).position.x < previousFramePos.x)
+                    {
+                        MoveLeft();
+                    }
+
+                    previousFramePos = Input.GetTouch(0).position;
+                }
+
+
+
+
+                if (Input.GetKey(KeyCode.A))
+                {
+                    MoveLeft();
+                }
+
+                if (Input.GetKey(KeyCode.D))
+                {
+                    MoveRight();
+                }
+
+                if (Input.GetKey(KeyCode.Space) || accelerate)
+                {
+                    acceleration = configObject.maxAcceleration;
+                    transform.Translate((Vector3.forward / 100) * acceleration);
+                }
+                else
+                {
+                    acceleration = configObject.normalAcceleration;
+                    transform.Translate((Vector3.forward / 100) * acceleration);
+                }
+            }
         }
     }
 

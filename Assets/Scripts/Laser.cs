@@ -22,7 +22,7 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<ScoreObject>())
+        if (!other.GetComponent<ScoreObject>() && other.gameObject.tag != "Blocking Volume")
         {
             if (!damageDealed)
             {
